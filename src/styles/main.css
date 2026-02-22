@@ -1,3 +1,7 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:is(.dark *));
+
 /* 导入相册样式 */
 @import "./albums.css";
 /* 导入追番页面样式 */
@@ -26,13 +30,22 @@
   font-display: swap;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Migrate from v3 config */
+@theme {
+  --font-sans: "Roboto", "sans-serif", ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1280px;
+}
 
 /* 确保平滑滚动 */
 html {
-  scroll-behavior: smooth;
+	@apply scroll-smooth;
+	@apply text-black/80;
+
+	&.dark {
+		@apply text-white/80;
+	}
 }
 
 /* 页面顶部渐变高光效果 */
@@ -51,6 +64,12 @@ html {
 /* 暗色主题下的渐变高光效果 */
 :root.dark .top-gradient-highlight {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.05) 80%, transparent 100%);
+}
+
+/* Migrated css */
+@utility expand-animation {
+  @apply relative before:ease-out before:duration-75 before:transition-all active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
+      before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
 }
 
 @layer components {
@@ -293,10 +312,6 @@ html {
   }
   .card-shadow {
     @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)];
-  }
-  .expand-animation {
-    @apply relative before:ease-out before:duration-75 before:transition-all active:bg-none hover:before:bg-[var(--btn-plain-bg-hover)] active:before:bg-[var(--btn-plain-bg-active)] z-0
-        before:absolute before:rounded-[inherit] before:inset-0 before:scale-[0.85] hover:before:scale-100 before:-z-10;
   }
   /* 主题切换时禁用按钮背景色过渡，确保立即更新 */
   .is-theme-transitioning .expand-animation::before {
