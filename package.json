@@ -23,11 +23,7 @@
 		"lint": "eslint ./src --fix",
 		"preinstall": "npx only-allow pnpm",
 		"compress-fonts": "node scripts/compress-fonts.js",
-		"test-font-compression": "node scripts/test-font-compression.js",
-		"lhci": "lhci",
-		"lighthouse": "lighthouse",
-		"performance:baseline": "node scripts/performance-baseline.js",
-		"performance:check": "node scripts/performance-check.js"
+		"test-font-compression": "node scripts/test-font-compression.js"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.8",
@@ -88,7 +84,6 @@
 		"@iconify-json/material-symbols": "^1.2.65",
 		"@iconify-json/mdi": "^1.2.3",
 		"@iconify-json/simple-icons": "^1.2.76",
-		"@lhci/cli": "^0.15.1",
 		"@rollup/plugin-yaml": "^4.1.2",
 		"@types/hast": "^3.0.4",
 		"@types/markdown-it": "^14.1.2",
